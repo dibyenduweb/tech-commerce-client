@@ -1,11 +1,15 @@
 
-import Footer from "../Footer/Footer";
+import { useLoaderData } from "react-router-dom";
+import Footer from "../Section/Footer";
 import Header from "./Header";
-
-
+import Brands from "../Section/Brands";
+import OurBrands from "../Section/OurBrands";
+import Subscribe from "../Section/Subscribe";
 
 
 const Home = () => {
+    const logodata = useLoaderData();
+    console.log(logodata);
     return (
         <>
         <Header/>
@@ -15,10 +19,20 @@ const Home = () => {
               <button className="btn btn-group">Buy Now</button>
            
         </div>
-        <h1 className="text-4xl font-bold text-center mt-4">Service</h1>
+        <h1 className='bg-blue-300 w-80 m-auto rounded-lg py-2 my-2 text-4xl font-bold text-center'>Our Best <span className='text-red-700'> Brands</span></h1>
+        <div className="grid grid-cols-3 gap-6 px-36">
+        {
+            logodata.map(logo => <Brands key={logo.id} logo={logo}></Brands>)
+        }
+        </div>
+       
+        {/* <h1 className="text-4xl font-bold text-center mt-4">Service</h1> */}
       <div className="grid lg:grid-cols-3 gap-4">
       </div>
-     <Footer></Footer>
+      <OurBrands/>
+      <Subscribe/>
+      <Footer/>
+     
             
             </>
        

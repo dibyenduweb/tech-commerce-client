@@ -1,8 +1,12 @@
-import Header from "../components/Home/Header";
+/* eslint-disable no-unused-vars */
+import React from 'react';
+import { useLoaderData } from 'react-router-dom';
 
-const AddProduct = () => {
+const Update = () => {
+    const singleData = useLoaderData()
+    console.log(singleData);
 
-    const handleAddProduct = (e) =>{
+    const handleUpdate =(e)=>{
         e.preventDefault();
 
         const form = e.target;
@@ -15,7 +19,7 @@ const AddProduct = () => {
         const rating = form.rating.value;
 
         //console.log(image, name, brand, type, price, shortDescription, rating );
-        const productData={
+        const updateData ={
             image, 
             name, 
             brand, 
@@ -24,28 +28,27 @@ const AddProduct = () => {
             shortDescription, 
             rating,
         };
-        console.log(productData);
+        console.log(updateData);
 
-    fetch("http://localhost:5000/products", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(productData),
-    })
-      .then((res) => res.json())
-      .then((data) => {
+        fetch(`http://localhost:5000/products/${singleData._id}`,{
+            method:"PUT",
+            headers:{
+                "Content-Type": "application/json",
+            },
+            body:JSON.stringify(updateData),
+        })
+        .then((res) =>res.json())
+        .then((data) =>{
         console.log(data);
-  
-      });
-      
+        });
+
+
     }
     return (
-        <>
-    <Header/>
-        <div className="bg-slate-500 p-10">
-            <h1 className='text-4xl text-center font-bold my-'>Add <span className='text-sky-500'>Product</span></h1>
-        <form  onSubmit={handleAddProduct} className="max-w-md mx-auto" >
+        <div>
+            <div className="bg-slate-500 p-10">
+            <h1 className='text-4xl text-center font-bold my-'>Update <span className='text-sky-600'>Product Data</span></h1>
+        <form onSubmit={handleUpdate} className="max-w-md mx-auto" >
       <div className="mb-4">
         <label htmlFor="image" className="block text-sm font-medium    text-red-700">
           Image URL
@@ -54,6 +57,7 @@ const AddProduct = () => {
           type="text"
           id="image"
           name="image"
+          defaultValue={singleData.image}
           className="mt-1 p-2 w-full border rounded focus:outline-none focus:ring focus:border-blue-300"
         />
       </div>
@@ -65,6 +69,7 @@ const AddProduct = () => {
           type="text"
           id="name"
           name="name"
+          defaultValue={singleData.name}
           className="mt-1 p-2 w-full border rounded focus:outline-none focus:ring focus:border-blue-300"
         />
       </div>
@@ -76,6 +81,7 @@ const AddProduct = () => {
           type="text"
           id="brand"
           name="brand"
+          defaultValue={singleData.brand}
           className="mt-1 p-2 w-full border rounded focus:outline-none focus:ring focus:border-blue-300"
         />
       </div>
@@ -86,6 +92,7 @@ const AddProduct = () => {
         <select
           id="type"
           name="type"
+          defaultValue={singleData.type}
           className="mt-1 p-2 w-full border rounded focus:outline-none focus:ring focus:border-blue-300"
         >
           <option value="phone">Phone</option>
@@ -102,6 +109,7 @@ const AddProduct = () => {
           type="text"
           id="price"
           name="price"
+          defaultValue={singleData.price}
           className="mt-1 p-2 w-full border rounded focus:outline-none focus:ring focus:border-blue-300"
         />
       </div>
@@ -112,6 +120,7 @@ const AddProduct = () => {
         <textarea
           id="shortDescription"
           name="shortDescription"
+          defaultValue={singleData.shortDescription}
           className="mt-1 p-2 w-full border rounded focus:outline-none focus:ring focus:border-blue-300"
         />
       </div>
@@ -123,6 +132,7 @@ const AddProduct = () => {
           type="number"
           id="rating"
           name="rating"
+          defaultValue={singleData.rating}
           className="mt-1 p-2 w-full border rounded focus:outline-none focus:ring focus:border-blue-300"
         />
       </div>
@@ -131,16 +141,15 @@ const AddProduct = () => {
           type="submit"
           className="bg-blue-500 text-white p-2 rounded hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300"
         >
-          Add Product
+          Update Data
         </button>
       </div>
     </form>
 
 
         </div>
-        </>
-        
+        </div>
     );
 };
 
-export default AddProduct;
+export default Update;

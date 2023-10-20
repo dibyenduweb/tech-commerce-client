@@ -36,7 +36,7 @@ const AddProduct = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-  
+      
       });
       
     }
@@ -91,7 +91,10 @@ const AddProduct = () => {
           <option value="phone">Phone</option>
           <option value="laptop">Laptop</option>
           <option value="computer">Computer</option>
+          <option value="homethear">HomeTheater</option>
           <option value="headphone">Headphone</option>
+          <option value="watch">Watch</option>
+          <option value="television">Television</option>
         </select>
       </div>
       <div className="mb-4">

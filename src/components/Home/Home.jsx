@@ -8,8 +8,8 @@ import Subscribe from "../Section/Subscribe";
 
 
 const Home = () => {
-    const logodata = useLoaderData();
-    console.log(logodata);
+    const brandData = useLoaderData();
+    console.log(brandData);
     return (
         <>
         <Header/>
@@ -22,7 +22,7 @@ const Home = () => {
         <h1 className='bg-blue-300 w-80 m-auto rounded-lg py-2 my-2 text-4xl font-bold text-center'>Our Best <span className='text-red-700'> Brands</span></h1>
         <div className="grid grid-cols-3 gap-6 px-36">
         {
-            logodata.map(logo => <Brands key={logo.id} logo={logo}></Brands>)
+            brandData.map(brand => <Brands key={brand.id} brand={brand}></Brands>)
         }
         </div>
        

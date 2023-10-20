@@ -13,8 +13,10 @@ import Home from "./components/Home/Home";
 import ErrorPage from "./ErrorPage/ErrorPage";
 import AddProduct from "./Menus/AddProduct";
 import Brands from "./components/Section/Brands";
-import Displayuser from "./components/Displayuser/Displayuser";
+import Displayuser from "./components/ShowProduct/Displayuser";
 import Update from "./components/Update/Update";
+import Shop from "./components/ProductPage/Shop";
+import MyCart from "./Menus/MyCart";
 // import Product from "./components/Home/Product";
 
 const router = createBrowserRouter([
@@ -26,8 +28,13 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
+        //loader: () => fetch(`http://localhost:5000/products`)
         loader: () => fetch('/Logodata.json')
-        
+      },
+      {
+        path:"/brand/:brandName",
+        element:<Shop></Shop>,
+        loader: ({params}) => fetch(`http://localhost:5000/products/${params.brandName}`)
       },
       {
         path:"/",
@@ -36,12 +43,16 @@ const router = createBrowserRouter([
        
       {
         path:"/addproduct",
-        element:<AddProduct></AddProduct>
+        element:<PrivateRoute><AddProduct></AddProduct></PrivateRoute>
       },
       {
         path:"/displayproduct",
         element:<Displayuser></Displayuser>,
-        loader: () => fetch(`http://localhost:5000/products`),
+        loader: () => fetch(`http://localhost:5000/products`)
+      },
+      {
+        path:"/cart",
+        element:<MyCart></MyCart>
       },
       {
         path:"/products/:id",
@@ -49,7 +60,6 @@ const router = createBrowserRouter([
         loader:({params}) =>{
           console.log(params)
           return fetch(`http://localhost:5000/products/${params.id}`)
-
         }
       },
       {

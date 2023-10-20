@@ -18,6 +18,7 @@ const Header = () => {
   <li><NavLink to="/">Home</NavLink></li>
   <li><NavLink to="/addproduct">Add Product</NavLink></li>
   <li><NavLink to="/displayproduct">ShopPage</NavLink></li>
+  <li><NavLink to="/cart">MyCart</NavLink></li>
   
   {user &&
     <>
